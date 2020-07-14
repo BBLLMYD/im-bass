@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.com.bass.skr</groupId>
+    <groupId>com.skr.im</groupId>
     <artifactId>im-bass</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <global.version>1.0.0-SNAPSHOT</global.version>
-        <global.group>com.bass.skr.im</global.group>
+        <global.group>com.skr.im</global.group>
         <protobuf.version>3.6.1</protobuf.version>
     </properties>
 
