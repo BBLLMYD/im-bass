@@ -8,6 +8,8 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.IdleStateHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,10 +18,15 @@ import java.util.concurrent.TimeUnit;
  * create at:  2020-07-12
  * @description:
  * */
+@Component
 public class IMChanelInitializer extends ChannelInitializer<SocketChannel> {
 
-    private IMTextAccessHandler textAccessHandler = new IMTextAccessHandler();
-    private AuthHandler authHandler = new AuthHandler();
+    @Autowired
+    IMTextAccessHandler imTextAccessHandler;
+
+    @Autowired
+    AuthHandler authHandler;
+
 
     @Override
     protected void initChannel(SocketChannel socketChannel) {
@@ -29,7 +36,7 @@ public class IMChanelInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new HttpObjectAggregator(65536));
         pipeline.addLast(new ChunkedWriteHandler());
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
-        pipeline.addLast(textAccessHandler);
+        pipeline.addLast(imTextAccessHandler);
         pipeline.addLast(authHandler);
     }
 }
