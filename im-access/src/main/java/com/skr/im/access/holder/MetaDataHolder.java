@@ -1,4 +1,4 @@
-package com.skr.im.access.boot;
+package com.skr.im.access.holder;
 
 import io.netty.channel.Channel;
 
@@ -14,6 +14,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class MetaDataHolder {
 
     private static final ConcurrentHashMap<String, Channel> userChannelMap = new ConcurrentHashMap<>();
+
     private static final Set<String> userRegister = new CopyOnWriteArraySet<>();
 
     public static void userOnLine(String userId,Channel channel){
