@@ -15,7 +15,7 @@ public class EventGenerator {
         }else if(UserActionEnum.GO_OFFLINE.equals(actionEnum)){
             return new UserGoOffLineEvent(source,userId);
         }
-        return null;
+        throw new RuntimeException("异常ActionEnum" + actionEnum);
     }
 
 }
