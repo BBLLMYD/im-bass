@@ -17,6 +17,7 @@ public class MetaDataHolder {
 
     private static final Set<String> userRegister = new CopyOnWriteArraySet<>();
 
+
     public static void userOnLine(String userId,Channel channel){
         userChannelMap.put(userId,channel);
     }
