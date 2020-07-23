@@ -1,12 +1,10 @@
 package com.skr.im.access.enumz;
 
-import lombok.Getter;
 
 /**
  * @author mqw
  * @create 2020-07-22-17:39
  */
-@Getter
 public enum UserActionEnum {
 
     /**
@@ -17,6 +15,17 @@ public enum UserActionEnum {
     /**
      * 下线
      */
-    GO_OFFLINE
+    GO_OFFLINE,
+
+    /**
+     * 私聊
+     */
+    CHAT_PRIVATE,
+
+    /**
+     * 群聊
+     */
+    CHAT_GROUP
+
 
 }

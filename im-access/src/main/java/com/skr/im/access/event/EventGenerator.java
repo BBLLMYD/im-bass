@@ -1,6 +1,8 @@
 package com.skr.im.access.event;
 
 import com.skr.im.access.enumz.UserActionEnum;
+import com.skr.im.access.event.impl.UserGoOffLineEvent;
+import com.skr.im.access.event.impl.UserGoOnlineEvent;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -9,13 +11,18 @@ import org.springframework.context.ApplicationEvent;
  */
 public class EventGenerator {
 
-    public static ApplicationEvent buildEvent(UserActionEnum actionEnum, String userId, Object source){
+    public static UserActionEvent buildEvent(UserActionEnum actionEnum, String userId, Object source){
+
         if(UserActionEnum.GO_ONLINE.equals(actionEnum)){
             return new UserGoOnlineEvent(source,userId);
-        }else if(UserActionEnum.GO_OFFLINE.equals(actionEnum)){
+        }
+
+        if(UserActionEnum.GO_OFFLINE.equals(actionEnum)){
             return new UserGoOffLineEvent(source,userId);
         }
+
         throw new RuntimeException("异常ActionEnum" + actionEnum);
     }
+
 
 }

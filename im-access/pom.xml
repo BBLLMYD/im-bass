@@ -25,6 +25,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.projectreactor</groupId>
+            <artifactId>reactor-spring</artifactId>
+            <version>1.0.1.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.50.Final</version>
