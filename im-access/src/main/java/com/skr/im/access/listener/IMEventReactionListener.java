@@ -1,9 +1,7 @@
 package com.skr.im.access.listener;
 
-import com.skr.im.access.event.UserActionEvent;
 import com.skr.im.access.event.impl.UserChatPrivateEvent;
 import org.springframework.stereotype.Component;
-import reactor.event.Event;
 import reactor.function.Consumer;
 
 /**
@@ -16,6 +14,7 @@ public class IMEventReactionListener implements Consumer<UserChatPrivateEvent> {
     @Override
     public void accept(UserChatPrivateEvent userChatPrivateEvent) {
         Object msg = userChatPrivateEvent.getMsg();
+        // 此处根据协议约定内容处理逻辑
         System.out.println(msg);
     }
 
