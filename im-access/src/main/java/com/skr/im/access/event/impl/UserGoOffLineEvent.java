@@ -1,5 +1,7 @@
-package com.skr.im.access.event;
+package com.skr.im.access.event.impl;
 
+
+import com.skr.im.access.event.UserActionEvent;
 
 /**
  * @author : mengqingwen 

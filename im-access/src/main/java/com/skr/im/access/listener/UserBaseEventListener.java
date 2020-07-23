@@ -1,7 +1,7 @@
 package com.skr.im.access.listener;
 
-import com.skr.im.access.event.UserGoOffLineEvent;
-import com.skr.im.access.event.UserGoOnlineEvent;
+import com.skr.im.access.event.impl.UserGoOffLineEvent;
+import com.skr.im.access.event.impl.UserGoOnlineEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @create 2020-07-22-17:56
  */
 @Component
-public class UserEventListener {
+public class UserBaseEventListener {
 
     @EventListener(classes = UserGoOnlineEvent.class)
     public void onUserGoOnLine(UserGoOnlineEvent userGoOnlineEvent){
