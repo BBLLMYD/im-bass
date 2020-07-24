@@ -3,8 +3,9 @@ package com.skr.im.access.utils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @author mqw
@@ -18,6 +19,8 @@ public class SpringContextHolder implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
         SpringContextHolder.applicationContext = applicationContext;
+        Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(Component.class);
+        System.out.println(beansWithAnnotation);
     }
 
     /**
