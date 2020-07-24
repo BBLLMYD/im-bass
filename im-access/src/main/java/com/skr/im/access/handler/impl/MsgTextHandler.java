@@ -14,6 +14,11 @@ public class MsgTextHandler implements MsgAsyncHandler<TextWebSocketFrame> {
     @Override
     public void handle(TextWebSocketFrame textWebSocketFrame) {
         System.err.println("收到文本消息。。。");
+        String text = textWebSocketFrame.text();
+        String[] split = text.split("\n");
+        for (String s : split) {
+            System.err.println(s);
+        }
     }
 
 

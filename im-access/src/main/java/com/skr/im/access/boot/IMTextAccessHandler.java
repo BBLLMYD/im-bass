@@ -2,7 +2,6 @@ package com.skr.im.access.boot;
 
 import com.skr.im.access.enumz.UserActionEnum;
 import com.skr.im.access.event.EventGenerator;
-import com.skr.im.access.event.UserActionEvent;
 import com.skr.im.access.event.impl.UserChatPrivateEvent;
 import com.skr.im.access.utils.SpringContextHolder;
 import io.netty.channel.ChannelHandler;
@@ -10,9 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.stereotype.Component;
 import reactor.core.Reactor;
 import reactor.event.Event;
 
@@ -25,17 +22,24 @@ import java.time.LocalDateTime;
  * */
 @Slf4j
 @ChannelHandler.Sharable
-@Component
 public class IMTextAccessHandler  extends SimpleChannelInboundHandler<TextWebSocketFrame>{
 
-    @Autowired
-    Reactor reactor;
+    private Reactor reactor;
+
+    public IMTextAccessHandler(boolean autoRelease, Reactor reactor){
+        super(autoRelease);
+        this.reactor = reactor;
+    }
+
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间" + LocalDateTime.now() + " " + msg.text()));
+        String text = msg.text();
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间" + LocalDateTime.now() + " " + text));
         String longText = ctx.channel().id().asLongText();
+        String text2 = msg.text();
         reactor.notify("imEventReactionListener", Event.wrap(new UserChatPrivateEvent(longText,msg)));
+        //Thread.sleep(100000);
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.skr.im.access.event.impl.UserChatPrivateEvent;
 import com.skr.im.access.handler.MsgAsyncHandler;
 import com.skr.im.access.utils.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import reactor.function.Consumer;
 
@@ -19,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 @Slf4j
-@DependsOn("springContextHolder")
+//@DependsOn("SpringContextHolder")
 public class IMEventReactionListener implements Consumer<UserChatPrivateEvent> {
 
     private static final ConcurrentHashMap<Class,MsgAsyncHandler> handlerMap = new ConcurrentHashMap<>();
@@ -29,7 +28,7 @@ public class IMEventReactionListener implements Consumer<UserChatPrivateEvent> {
         Object msg = userChatPrivateEvent.getMsg();
         // 此处根据协议约定内容处理逻辑
         MsgAsyncHandler handler = getHandlerInstance(msg.getClass());
-        handler.handle(msg);
+        handler.deal(msg);
     }
 
 

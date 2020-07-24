@@ -9,8 +9,10 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,9 +21,11 @@ import java.util.concurrent.TimeUnit;
  * @description:
  * */
 @Component
+@DependsOn("IMHandlerFactory")
 public class IMChanelInitializer extends ChannelInitializer<SocketChannel> {
 
-    @Autowired
+//    @Qualifier("IMHandlerFactory")
+    @Resource(name = "IMHandlerFactory")
     IMTextAccessHandler imTextAccessHandler;
 
     @Autowired
