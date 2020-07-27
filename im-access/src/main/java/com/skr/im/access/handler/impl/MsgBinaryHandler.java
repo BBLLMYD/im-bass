@@ -16,7 +16,6 @@ public class MsgBinaryHandler implements MsgAsyncHandler<BinaryWebSocketFrame> {
     public void handle(BinaryWebSocketFrame binaryWebSocketFrame) {
         ByteBuf content = binaryWebSocketFrame.content();
         content.array();
-
     }
 
 }
