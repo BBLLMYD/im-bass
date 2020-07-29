@@ -25,7 +25,7 @@ import java.util.concurrent.*;
 @Slf4j
 public class NettyServerBoot {
 
-    private static ExecutorService pool =
+    private static final ExecutorService POOL =
             new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,
                     new LinkedBlockingQueue<>(),new NamedThreadFactory("nettyServerBoot-pool"));
 
@@ -38,7 +38,7 @@ public class NettyServerBoot {
 
     @PostConstruct
     public void run(){
-        pool.submit(() -> {
+        POOL.submit(() -> {
             EventLoopGroup boss = new NioEventLoopGroup();
             EventLoopGroup worker = new NioEventLoopGroup(3);
             log.info("NettyServerBoot begin start at port : {}",port);
