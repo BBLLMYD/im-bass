@@ -21,5 +21,4 @@ public class MsgTextHandler implements MsgAsyncHandler<TextWebSocketFrame> {
         }
     }
 
-
 }
