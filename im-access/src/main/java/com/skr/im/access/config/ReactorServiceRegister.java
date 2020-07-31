@@ -16,6 +16,8 @@ import static reactor.event.selector.Selectors.$;
 @Component
 public class ReactorServiceRegister implements InitializingBean {
 
+    public static final String IM_EVENT_REACTION_LISTENER = "imEventReactionListener";
+
     @Autowired
   	private Reactor reactor;
 
@@ -25,7 +27,7 @@ public class ReactorServiceRegister implements InitializingBean {
     @Override
     public void afterPropertiesSet() {
         Consumer consumer = this.imEventReactionListener;
-        reactor.on($("imEventReactionListener"), consumer);
+        reactor.on($(IM_EVENT_REACTION_LISTENER), consumer);
     }
 
 }

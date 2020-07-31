@@ -1,5 +1,6 @@
 package com.skr.im.access.boot;
 
+import com.skr.im.access.config.ReactorServiceRegister;
 import com.skr.im.access.enumz.UserActionEnum;
 import com.skr.im.access.event.EventGenerator;
 import com.skr.im.access.event.impl.UserChatPrivateEvent;
@@ -13,7 +14,6 @@ import org.springframework.context.ApplicationEvent;
 import reactor.core.Reactor;
 import reactor.event.Event;
 
-import java.time.LocalDateTime;
 
 /**
  * @author : mengqingwen 
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
  * */
 @Slf4j
 @ChannelHandler.Sharable
-public class IMTextAccessHandler  extends SimpleChannelInboundHandler<TextWebSocketFrame>{
+public class IMTextAccessHandler  extends SimpleChannelInboundHandler<WebSocketFrame>{
 
     private Reactor reactor;
 
@@ -31,15 +31,11 @@ public class IMTextAccessHandler  extends SimpleChannelInboundHandler<TextWebSoc
         this.reactor = reactor;
     }
 
-
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        String text = msg.text();
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间" + LocalDateTime.now() + " " + text));
+    protected void channelRead0(ChannelHandlerContext ctx, WebSocketFrame msg) {
         String longText = ctx.channel().id().asLongText();
-        String text2 = msg.text();
-        reactor.notify("imEventReactionListener", Event.wrap(new UserChatPrivateEvent(longText,msg)));
-        //Thread.sleep(100000);
+        reactor.notify(ReactorServiceRegister.IM_EVENT_REACTION_LISTENER,
+                Event.wrap(new UserChatPrivateEvent(longText,msg)));
     }
 
     @Override

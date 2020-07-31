@@ -17,6 +17,7 @@ build/
 # idea ignore
 .idea/
 *.ipr
+*.class
 *.iml
 *.iws
 
