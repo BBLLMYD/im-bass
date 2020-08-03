@@ -1,6 +1,6 @@
-package com.skr.im.access.factory;
+package com.skr.im.access.boot.factory;
 
-import com.skr.im.access.boot.IMTextAccessHandler;
+import com.skr.im.access.boot.IMMsgAccessHandler;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,14 +11,14 @@ import reactor.core.Reactor;
  * @create 2020-07-24-17:51
  */
 @Component
-public class IMHandlerFactory implements FactoryBean<IMTextAccessHandler> {
+public class IMHandlerFactory implements FactoryBean<IMMsgAccessHandler> {
 
     @Autowired
     Reactor reactor;
 
     @Override
-    public IMTextAccessHandler getObject() {
-        return new IMTextAccessHandler(false,reactor);
+    public IMMsgAccessHandler getObject() {
+        return new IMMsgAccessHandler(false,reactor);
     }
 
     @Override

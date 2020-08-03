@@ -1,4 +1,4 @@
-package com.skr.im.access.holder;
+package com.skr.im.access.boot.holder;
 
 import io.netty.channel.Channel;
 
