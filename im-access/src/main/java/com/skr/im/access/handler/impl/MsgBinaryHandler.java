@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
  * @create 2020-07-24-10:44
  */
 @Service
-public class MsgBinaryHandler implements MsgAsyncHandler<BinaryWebSocketFrame> {
+public class MsgBinaryHandler implements MsgAsyncHandler<Byte[]> {
 
     @Override
-    public void handle(BinaryWebSocketFrame binaryWebSocketFrame) {
-        ByteBuf content = binaryWebSocketFrame.content();
-        content.array();
-    }
+    public void handle(Byte[] bytes) {
 
+    }
 }

@@ -22,20 +22,29 @@ import reactor.event.Event;
  * */
 @Slf4j
 @ChannelHandler.Sharable
-public class IMTextAccessHandler  extends SimpleChannelInboundHandler<WebSocketFrame>{
+public class IMMsgAccessHandler  extends SimpleChannelInboundHandler<WebSocketFrame>{
 
     private Reactor reactor;
 
-    public IMTextAccessHandler(boolean autoRelease, Reactor reactor){
+    public IMMsgAccessHandler(boolean autoRelease, Reactor reactor){
         super(autoRelease);
         this.reactor = reactor;
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, WebSocketFrame msg) {
+        Object data;
+        if(msg instanceof TextWebSocketFrame){
+            data = ((TextWebSocketFrame) msg).text();
+        }else if(msg instanceof BinaryWebSocketFrame){
+            data = msg.content().array();
+        }else {
+            ctx.close();
+            return;
+        }
         String longText = ctx.channel().id().asLongText();
         reactor.notify(ReactorServiceRegister.IM_EVENT_REACTION_LISTENER,
-                Event.wrap(new UserChatPrivateEvent(longText,msg)));
+                Event.wrap(new UserChatPrivateEvent(longText,data)));
     }
 
     @Override

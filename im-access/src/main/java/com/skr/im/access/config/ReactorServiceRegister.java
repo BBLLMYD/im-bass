@@ -1,6 +1,6 @@
 package com.skr.im.access.config;
 
-import com.skr.im.access.listener.IMEventReactionListener;
+import com.skr.im.access.event.listener.IMEventReactionListener;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

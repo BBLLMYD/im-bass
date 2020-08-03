@@ -1,4 +1,4 @@
-package com.skr.im.access.listener;
+package com.skr.im.access.event.listener;
 
 import com.skr.im.access.event.impl.UserGoOffLineEvent;
 import com.skr.im.access.event.impl.UserGoOnlineEvent;
