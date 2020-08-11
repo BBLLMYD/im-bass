@@ -1,6 +1,6 @@
 package com.skr.im.access.boot.factory;
 
-import com.skr.im.access.boot.IMMsgAccessHandler;
+import com.skr.im.access.boot.IMMsgAccessWSHandler;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,14 +11,14 @@ import reactor.core.Reactor;
  * @create 2020-07-24-17:51
  */
 @Component
-public class IMHandlerFactory implements FactoryBean<IMMsgAccessHandler> {
+public class IMHandlerFactory implements FactoryBean<IMMsgAccessWSHandler> {
 
     @Autowired
     Reactor reactor;
 
     @Override
-    public IMMsgAccessHandler getObject() {
-        return new IMMsgAccessHandler(false,reactor);
+    public IMMsgAccessWSHandler getObject() {
+        return new IMMsgAccessWSHandler(false,reactor);
     }
 
     @Override
@@ -28,6 +28,6 @@ public class IMHandlerFactory implements FactoryBean<IMMsgAccessHandler> {
 
     @Override
     public boolean isSingleton() {
-        return false;
+        return true;
     }
 }
