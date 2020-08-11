@@ -31,7 +31,6 @@ public class IMChanelInitializer extends ChannelInitializer<SocketChannel> {
     @Autowired
     AuthHandler authHandler;
 
-
     @Override
     protected void initChannel(SocketChannel socketChannel) {
         ChannelPipeline pipeline = socketChannel.pipeline();
