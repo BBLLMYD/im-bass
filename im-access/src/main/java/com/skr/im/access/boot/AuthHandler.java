@@ -41,6 +41,4 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
     }
 
 
-
-
 }
