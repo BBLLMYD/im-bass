@@ -22,11 +22,11 @@ import reactor.event.Event;
  * */
 @Slf4j
 @ChannelHandler.Sharable
-public class IMMsgAccessHandler  extends SimpleChannelInboundHandler<WebSocketFrame>{
+public class IMMsgAccessWSHandler  extends SimpleChannelInboundHandler<WebSocketFrame>{
 
     private Reactor reactor;
 
-    public IMMsgAccessHandler(boolean autoRelease, Reactor reactor){
+    public IMMsgAccessWSHandler(boolean autoRelease, Reactor reactor){
         super(autoRelease);
         this.reactor = reactor;
     }

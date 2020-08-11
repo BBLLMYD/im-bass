@@ -26,7 +26,7 @@ public class IMChanelInitializer extends ChannelInitializer<SocketChannel> {
 
 //    @Qualifier("IMHandlerFactory")
     @Resource(name = "IMHandlerFactory")
-    IMMsgAccessHandler imTextAccessHandler;
+    IMMsgAccessWSHandler imTextAccessHandler;
 
     @Autowired
     AuthHandler authHandler;
