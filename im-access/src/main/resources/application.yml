@@ -5,3 +5,6 @@ server:
 logging:
   level:
     root: debug
+
+
+users: Jack,John,Skr,GouDan,SanMao,TuTu
