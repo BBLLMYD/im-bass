@@ -13,6 +13,7 @@ public interface MsgAsyncHandler<T> {
         try {
             handle(t);
         }finally {
+            // 内存释放
             ReferenceCountUtil.release(t);
         }
     }

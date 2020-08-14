@@ -1,9 +1,11 @@
 package com.skr.im.access.boot.holder;
 
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelPromise;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
@@ -15,6 +17,7 @@ public class MetaDataHolder {
 
     private static final ConcurrentHashMap<String, Channel> userChannelMap = new ConcurrentHashMap<>();
 
+
     private static final Set<String> userRegister = new CopyOnWriteArraySet<>();
 
     public static void userOnLine(String userId,Channel channel){
@@ -22,7 +25,14 @@ public class MetaDataHolder {
     }
 
     public static void userOffLine(String userId){
-        userChannelMap.remove(userId);
+        Channel remove = userChannelMap.remove(userId);
+    }
+
+    public static void userForceOffLine(String userId){
+        Channel remove = userChannelMap.remove(userId);
+        if(Objects.nonNull(remove)){
+            remove.close();
+        }
     }
 
     public static boolean isOnline(String userId){
@@ -37,7 +47,6 @@ public class MetaDataHolder {
         ConcurrentHashMap.KeySetView<String, Channel> strings = userChannelMap.keySet();
         return strings;
     }
-
 
 
 }
