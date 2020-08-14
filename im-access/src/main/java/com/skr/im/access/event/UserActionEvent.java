@@ -15,6 +15,9 @@ public class UserActionEvent extends ApplicationEvent {
     private String userId;
 
     @Getter
+    private String userName;
+
+    @Getter
     private Object msg;
 
     protected UserActionEvent(Object source, String userId){

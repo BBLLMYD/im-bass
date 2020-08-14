@@ -7,4 +7,4 @@ logging:
     root: debug
 
 
-users: Jack,John,Skr,GouDan,SanMao,TuTu
+userIds: Jack,John,Skr,GouDan,SanMao,TuTu
