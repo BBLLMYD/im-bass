@@ -17,6 +17,7 @@ public class UserBaseEventListener {
     @EventListener(classes = UserGoOnlineEvent.class)
     public void onUserGoOnLine(UserGoOnlineEvent userGoOnlineEvent){
         MetaDataHolder.userOnLine(userGoOnlineEvent.getUserId(),(Channel) userGoOnlineEvent.getSource());
+        // todo
         System.err.println("UserEventListener="+userGoOnlineEvent);
     }
 
