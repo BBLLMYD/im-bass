@@ -25,7 +25,7 @@ public enum UserActionEnum {
     /**
      * 群聊
      */
-    CHAT_GROUP
+    CHAT_GROUP;
 
 
 }

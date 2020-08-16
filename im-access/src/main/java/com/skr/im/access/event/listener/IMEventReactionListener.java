@@ -1,6 +1,5 @@
 package com.skr.im.access.event.listener;
 
-import com.skr.im.access.boot.holder.MetaDataHolder;
 import com.skr.im.access.event.impl.UserChatPrivateEvent;
 import com.skr.im.access.handler.MsgAsyncHandler;
 import com.skr.im.access.utils.SpringContextHolder;
@@ -26,15 +25,17 @@ public class IMEventReactionListener implements Consumer<UserChatPrivateEvent> {
 
     @Override
     public void accept(UserChatPrivateEvent userChatPrivateEvent) {
-        Object msg = userChatPrivateEvent.getMsg();
+        Object msg = userChatPrivateEvent.getChannelAction().getData();
         // 此处根据协议约定内容处理逻辑
         MsgAsyncHandler handler = getHandlerInstance(msg.getClass());
         try {
             handler.deal(msg);
         }catch (IllegalStateException e){
-            MetaDataHolder.userForceOffLine(userChatPrivateEvent.getUserId());
+            log.error("",e);
+            userChatPrivateEvent.getChannel().writeAndFlush("illegal msg");
         }catch (Exception e){
-            log.error("error",e);
+            log.error("",e);
+            userChatPrivateEvent.getChannel().writeAndFlush("error msg");
         }
     }
 

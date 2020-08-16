@@ -5,6 +5,7 @@ import com.skr.im.access.enumz.UserActionEnum;
 import com.skr.im.access.event.EventGenerator;
 import com.skr.im.access.event.impl.UserChatPrivateEvent;
 import com.skr.im.access.utils.SpringContextHolder;
+import com.skr.im.access.vo.ChannelAction;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -42,22 +43,27 @@ public class IMMsgAccessWSHandler extends SimpleChannelInboundHandler<WebSocketF
             ctx.close();
             return;
         }
-        String longText = ctx.channel().id().asLongText();
+        ChannelAction channelAction = ChannelAction.builder()
+                .channel(ctx.channel())
+                .userActionEnum(UserActionEnum.CHAT_PRIVATE)
+                .data(data)
+                .build();
+
         reactor.notify(ReactorServiceRegister.IM_EVENT_REACTION_LISTENER,
-                Event.wrap(new UserChatPrivateEvent(longText,data)));
+                Event.wrap(new UserChatPrivateEvent(channelAction)));
     }
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        String longText = ctx.channel().id().asLongText();
-        ApplicationEvent event = EventGenerator.buildEvent(UserActionEnum.GO_ONLINE, longText, ctx.channel());
+        ChannelAction channelAction = ChannelAction.builder().channel(ctx.channel()).userActionEnum(UserActionEnum.GO_ONLINE).build();
+        ApplicationEvent event = EventGenerator.buildEvent(channelAction);
         SpringContextHolder.publishEvent(event);
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        String longText = ctx.channel().id().asLongText();
-        ApplicationEvent event = EventGenerator.buildEvent(UserActionEnum.GO_OFFLINE, longText, ctx.channel());
+        ChannelAction channelAction = ChannelAction.builder().channel(ctx.channel()).userActionEnum(UserActionEnum.GO_OFFLINE).build();
+        ApplicationEvent event = EventGenerator.buildEvent(channelAction);
         SpringContextHolder.publishEvent(event);
     }
 
