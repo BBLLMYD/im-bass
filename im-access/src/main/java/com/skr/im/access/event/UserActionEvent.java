@@ -1,5 +1,7 @@
 package com.skr.im.access.event;
 
+import com.skr.im.access.vo.ChannelAction;
+import io.netty.channel.Channel;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
@@ -9,26 +11,23 @@ import org.springframework.context.ApplicationEvent;
  * create at:  2020-07-22
  * @description:
  * */
-public class UserActionEvent extends ApplicationEvent {
+public abstract class UserActionEvent extends ApplicationEvent {
 
     @Getter
-    private String userId;
+    private String channelId;
 
     @Getter
-    private String userName;
+    private Channel channel;
 
     @Getter
-    private Object msg;
+    private ChannelAction channelAction;
 
-    protected UserActionEvent(Object source, String userId){
-        super(source);
-        this.userId = userId;
+    protected UserActionEvent(ChannelAction channelAction){
+        super(channelAction);
+        this.channelAction = channelAction;
+        this.channel = channelAction.getChannel();
+        this.channelId = channel.id().asLongText();
     }
 
-    protected UserActionEvent(Object source, String userId, Object msg){
-        super(source);
-        this.userId = userId;
-        this.msg = msg;
-    }
 
 }

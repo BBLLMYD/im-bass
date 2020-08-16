@@ -1,6 +1,7 @@
 package com.skr.im.access.event.impl;
 
 import com.skr.im.access.event.UserActionEvent;
+import com.skr.im.access.vo.ChannelAction;
 
 /**
  * @author mqw
@@ -8,8 +9,8 @@ import com.skr.im.access.event.UserActionEvent;
  */
 public class UserChatPrivateEvent extends UserActionEvent {
 
-    public UserChatPrivateEvent(String userId, Object msg) {
-        super(UserChatPrivateEvent.class, userId, msg);
+    public UserChatPrivateEvent(ChannelAction channelAction) {
+        super(channelAction);
     }
 
 }

@@ -1,8 +1,8 @@
 package com.skr.im.access.event.listener;
 
 import com.skr.im.access.boot.holder.MetaDataHolder;
-import com.skr.im.access.event.impl.UserGoOffLineEvent;
-import com.skr.im.access.event.impl.UserGoOnlineEvent;
+import com.skr.im.access.enumz.UserActionEnum;
+import com.skr.im.access.event.impl.UserLineEvent;
 import io.netty.channel.Channel;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -14,16 +14,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserBaseEventListener {
 
-    @EventListener(classes = UserGoOnlineEvent.class)
-    public void onUserGoOnLine(UserGoOnlineEvent userGoOnlineEvent){
-        MetaDataHolder.userOnLine(userGoOnlineEvent.getUserId(),(Channel) userGoOnlineEvent.getSource());
-        // todo
-        System.err.println("UserEventListener="+userGoOnlineEvent);
+    @EventListener(classes = UserLineEvent.class)
+    public void onUserGoOnLine(UserLineEvent userlineEvent){
+
+        Channel channel = userlineEvent.getChannel();
+
+        if(userlineEvent.getChannelAction().getUserActionEnum() == UserActionEnum.GO_ONLINE){
+            MetaDataHolder.channelOnLine(channel.id().asLongText(),channel);
+        }
+
+        if(userlineEvent.getChannelAction().getUserActionEnum() == UserActionEnum.GO_OFFLINE){
+            MetaDataHolder.channelOffLine(channel.id().asLongText());
+        }
+
     }
 
-    @EventListener(classes = UserGoOffLineEvent.class)
-    public void onUserGoOffLine(UserGoOffLineEvent userGoOffLineEvent){
-        System.err.println("UserGoOffLineEvent="+userGoOffLineEvent);
-    }
 
 }

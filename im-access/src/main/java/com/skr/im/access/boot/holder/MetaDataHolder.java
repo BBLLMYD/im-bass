@@ -20,12 +20,12 @@ public class MetaDataHolder {
 
     private static final Set<String> userRegister = new CopyOnWriteArraySet<>();
 
-    public static void userOnLine(String userId,Channel channel){
-        userChannelMap.put(userId,channel);
+    public static void channelOnLine(String channelId,Channel channel){
+        userChannelMap.put(channelId,channel);
     }
 
-    public static void userOffLine(String userId){
-        Channel remove = userChannelMap.remove(userId);
+    public static void channelOffLine(String channelId){
+        Channel remove = userChannelMap.remove(channelId);
     }
 
     public static void userForceOffLine(String userId){
