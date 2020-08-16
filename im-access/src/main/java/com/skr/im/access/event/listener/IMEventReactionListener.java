@@ -31,10 +31,10 @@ public class IMEventReactionListener implements Consumer<UserChatPrivateEvent> {
         try {
             handler.deal(msg);
         }catch (IllegalStateException e){
-            log.error("",e);
+            log.error("IMEventReactionListener-IllegalStateException",e);
             userChatPrivateEvent.getChannel().writeAndFlush("illegal msg");
         }catch (Exception e){
-            log.error("",e);
+            log.error("IMEventReactionListener-Exception",e);
             userChatPrivateEvent.getChannel().writeAndFlush("error msg");
         }
     }
