@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author mqw
@@ -20,6 +24,8 @@ public class UserServiceImpl implements UserService {
 
     List<String> userList;
 
+    Map<String, Queue> userMsg;
+
     @Override
     public boolean auth(String userName) {
         if(userList.contains(userName)){
@@ -28,9 +34,13 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+
     @PostConstruct
     void initData(){
         userList = Arrays.asList(users.split(","));
+        ConcurrentHashMap<String, Queue> hashMap = new ConcurrentHashMap<>();
+        userList.forEach(vo-> hashMap.put(vo,new LinkedBlockingQueue()));
+        userMsg = hashMap;
     }
 
 }

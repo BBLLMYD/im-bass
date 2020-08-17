@@ -1,6 +1,7 @@
 package com.skr.im.access.handler;
 
 
+import io.netty.channel.Channel;
 import io.netty.util.ReferenceCountUtil;
 
 /**
@@ -9,15 +10,15 @@ import io.netty.util.ReferenceCountUtil;
  */
 public interface MsgAsyncHandler<T> {
 
-    default void deal(T t){
+    default void deal(T t, Channel channel){
         try {
-            handle(t);
+            handle(t,channel);
         }finally {
             // 内存释放
             ReferenceCountUtil.release(t);
         }
     }
 
-    void handle(T t);
+    void handle(T t,Channel channel);
 
 }
