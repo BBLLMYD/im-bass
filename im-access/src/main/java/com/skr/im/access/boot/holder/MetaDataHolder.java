@@ -2,6 +2,8 @@ package com.skr.im.access.boot.holder;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelPromise;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,36 +17,35 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * */
 public class MetaDataHolder {
 
-    private static final ConcurrentHashMap<String, Channel> userChannelMap = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Channel> channelIdMap = new ConcurrentHashMap<>();
 
-
-    private static final Set<String> userRegister = new CopyOnWriteArraySet<>();
 
     public static void channelOnLine(String channelId,Channel channel){
-        userChannelMap.put(channelId,channel);
+        channelIdMap.put(channelId,channel);
     }
 
     public static void channelOffLine(String channelId){
-        Channel remove = userChannelMap.remove(channelId);
+        Channel remove = channelIdMap.remove(channelId);
     }
 
-    public static void userForceOffLine(String userId){
-        Channel remove = userChannelMap.remove(userId);
-        if(Objects.nonNull(remove)){
-            remove.close();
-        }
+
+
+    public static void userLogin(String userId,Channel channel){
     }
 
-    public static boolean isOnline(String userId){
-        return userChannelMap.containsKey(userId);
+    public static void userLogout(String userId,Channel channel){
     }
 
-    public static void userAdd(String userId){
-        userRegister.add(userId);
+    public static void msgToUser(String userFrom, String msg, String userTo){
+        new TextWebSocketFrame(msg);
+    }
+
+    public static boolean userIsOnline(String userId){
+        return channelIdMap.containsKey(userId);
     }
 
     public static Set<String> onLineUsers(){
-        ConcurrentHashMap.KeySetView<String, Channel> strings = userChannelMap.keySet();
+        ConcurrentHashMap.KeySetView<String, Channel> strings = channelIdMap.keySet();
         return strings;
     }
 
