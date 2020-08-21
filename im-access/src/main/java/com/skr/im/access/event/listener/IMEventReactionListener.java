@@ -3,7 +3,6 @@ package com.skr.im.access.event.listener;
 import com.skr.im.access.event.impl.UserChatPrivateEvent;
 import com.skr.im.access.handler.MsgAsyncHandler;
 import com.skr.im.access.utils.SpringContextHolder;
-import io.netty.channel.ChannelFuture;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 @Slf4j
-//@DependsOn("SpringContextHolder")
 public class IMEventReactionListener implements Consumer<UserChatPrivateEvent> {
 
     private static final ConcurrentHashMap<Class,MsgAsyncHandler> handlerMap = new ConcurrentHashMap<>();
@@ -41,6 +39,7 @@ public class IMEventReactionListener implements Consumer<UserChatPrivateEvent> {
             TextWebSocketFrame errorMsg = new TextWebSocketFrame("error msg");
             userChatPrivateEvent.getChannel().writeAndFlush(errorMsg);
         }
+
     }
 
 
