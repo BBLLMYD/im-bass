@@ -1,8 +1,7 @@
 package com.skr.im.access.handler.impl;
 
 import com.skr.im.access.handler.MsgAsyncHandler;
-import io.netty.buffer.ByteBuf;
-import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
+import io.netty.channel.Channel;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class MsgBinaryHandler implements MsgAsyncHandler<Byte[]> {
 
     @Override
-    public void handle(Byte[] bytes) {
+    public void handle(Byte[] bytes, Channel channel) {
 
     }
 }
