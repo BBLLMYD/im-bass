@@ -42,7 +42,6 @@ public class IMEventReactionListener implements Consumer<UserChatPrivateEvent> {
 
     }
 
-
     /**
      * @param paramType
      * @return
