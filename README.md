@@ -1,12 +1,12 @@
 ## 基础IM通信
 
-以学习为目的，基于WebSocket和TCP协议，做一个简易的IM服务，持续演进中
+基于 WebSocket 和 TCP 协议，做一个简易、可扩展的IM服务，以学习为目的，持续演进中
 
 ---
 
-- SpringBoot作为构建基础；
+- SpringBoot 作为构建基础；
 
-- 通信部分采用Netty；
+- 通信部分采用 Netty；
 
-- 内部用Reactor进行包装事件的异步处理；
+- 内部用 Reactor 进行事件封装和异步处理；
 
